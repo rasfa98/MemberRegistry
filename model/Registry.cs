@@ -27,7 +27,7 @@ namespace MemberRegistry.model
             return File.ReadAllText("data.json");
         }
 
-        public void WriteFile(string data)
+        private void WriteFile(string data)
         {
             File.WriteAllText("data.json", data);
         }
