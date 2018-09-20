@@ -4,6 +4,13 @@ namespace MemberRegistry.view
 {
     class CreateMember
     {
+        private model.Registry registry;
+
+        public CreateMember()
+        {
+            registry = new model.Registry();
+        }
+
         public void Display()
         {
             Console.Clear();
@@ -17,7 +24,7 @@ namespace MemberRegistry.view
             Console.Write("Personal number: ");
             string personalNumber = Console.ReadLine();
 
-            // TODO: Save member to JSON file
+            registry.AddMember(name, personalNumber);
         }
     }
 }
