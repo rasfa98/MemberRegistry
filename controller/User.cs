@@ -13,7 +13,7 @@ namespace MemberRegistry.controller
             createMember = new view.CreateMember();
         }
 
-        public void initialize()
+        public void Initialize()
         {
             menu.Display();
 
