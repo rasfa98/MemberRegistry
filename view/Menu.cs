@@ -21,5 +21,10 @@ namespace MemberRegistry.view
             Console.WriteLine("7) Edit boat information");
             Console.WriteLine("8) Delete boat");
         }
+
+        public bool UserWantsToCreateMember()
+        {
+            return Console.ReadKey().Key == ConsoleKey.D1;
+        }
     }
 }
