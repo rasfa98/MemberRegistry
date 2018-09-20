@@ -6,7 +6,8 @@ namespace MemberRegistry
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            controller.User user = new controller.User();
+            user.initialize();
         }
     }
 }
