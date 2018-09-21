@@ -8,13 +8,15 @@ namespace MemberRegistry.model
 {
     class Registry
     {
-        public void AddMember(string name, string personalNumber)
+        public Guid SelectedMemberId { get; set; }
+
+        public void AddMember(Guid id, string name, string personalNumber)
         {
             string jsonFile = ReadFile();
 
             List<Member> existingMembers = JsonConvert.DeserializeObject<List<Member>>(jsonFile);
 
-            Member newMember = new Member(name, personalNumber);
+            Member newMember = new Member(id, name, personalNumber);
 
             existingMembers.Add(newMember);
 
@@ -23,18 +25,35 @@ namespace MemberRegistry.model
             WriteFile(existingMembersJson);
         }
 
-        public Member ViewMember(Guid memberId)
+        public Member ViewMember()
         {
             string jsonFile = ReadFile();
 
             List<Member> existingMembers = JsonConvert.DeserializeObject<List<Member>>(jsonFile);
 
-            return existingMembers.Where(member => member.Id == memberId).ToList()[0];
+            return existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
         }
 
-        public void EditMember(Guid memberId, string newName, string NewPersonalNumber)
+        public void EditMember(string newName, string NewPersonalNumber)
         {
-            // TODO: Edit members information
+            string jsonFile = ReadFile();
+
+            List<Member> existingMembers = JsonConvert.DeserializeObject<List<Member>>(jsonFile);
+
+            Member memberToEdit = existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
+
+            memberToEdit.Name = newName;
+            memberToEdit.PersonalNumber = NewPersonalNumber;
+
+            string existingMembersJson = JsonConvert.SerializeObject(existingMembers, Formatting.Indented);
+
+            WriteFile(existingMembersJson);
+        }
+
+        public List<Member> ViewAll()
+        {
+            string jsonFile = ReadFile();
+            return JsonConvert.DeserializeObject<List<Member>>(jsonFile);
         }
 
         private string ReadFile()

@@ -6,9 +6,9 @@ namespace MemberRegistry.view
     {
         private model.Registry registry;
 
-        public CreateMember()
+        public CreateMember(model.Registry registry)
         {
-            registry = new model.Registry();
+            this.registry = registry;
         }
 
         public void Display()
@@ -24,7 +24,7 @@ namespace MemberRegistry.view
             Console.Write("Personal number: ");
             string personalNumber = Console.ReadLine();
 
-            registry.AddMember(name, personalNumber);
+            registry.AddMember(Guid.NewGuid(), name, personalNumber);
         }
     }
 }

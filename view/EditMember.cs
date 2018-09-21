@@ -4,6 +4,13 @@ namespace MemberRegistry.view
 {
     class EditMember
     {
+        private model.Registry registry;
+
+        public EditMember(model.Registry registry)
+        {
+            this.registry = registry;
+        }
+
         public void Display()
         {
             Console.Clear();
@@ -16,6 +23,8 @@ namespace MemberRegistry.view
 
             Console.Write("New personal number: ");
             string personalNumber = Console.ReadLine();
+
+            registry.EditMember(name, personalNumber);
         }
     }
 }
