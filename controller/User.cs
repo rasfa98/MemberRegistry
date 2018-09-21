@@ -75,6 +75,13 @@ namespace MemberRegistry.controller
                     selectBoat.SaveSelectedBoatId();
                     editBoat.Display();
                     break;
+                case ConsoleKey.D8:
+                    selectMember.Display();
+                    selectMember.SaveSelectedMemberId();
+                    selectBoat.Display();
+                    selectBoat.SaveSelectedBoatId();
+                    registry.DeleteBoat();
+                    break;
             }
         }
 

@@ -98,6 +98,20 @@ namespace MemberRegistry.model
             WriteFile(existingMembersJson);
         }
 
+        public void DeleteBoat()
+        {
+            string jsonFile = ReadFile();
+
+            List<Member> existingMembers = JsonConvert.DeserializeObject<List<Member>>(jsonFile);
+
+            Member memberToEdit = existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
+            memberToEdit.Boats = memberToEdit.Boats.Where(boat => boat.Id != SelectedBoatId).ToList();
+
+            string existingMembersJson = JsonConvert.SerializeObject(existingMembers, Formatting.Indented);
+
+            WriteFile(existingMembersJson);
+        }
+
         public List<Member> ViewAll()
         {
             string jsonFile = ReadFile();
