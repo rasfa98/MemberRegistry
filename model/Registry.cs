@@ -9,6 +9,7 @@ namespace MemberRegistry.model
     class Registry
     {
         public Guid SelectedMemberId { get; set; }
+        public Guid SelectedBoatId { get; set; }
 
         public void AddMember(Guid id, string name, string personalNumber)
         {
@@ -74,6 +75,23 @@ namespace MemberRegistry.model
             Boat newBoat = new Boat(id, type, length);
 
             memberToAddBoat.Boats.Add(newBoat);
+
+            string existingMembersJson = JsonConvert.SerializeObject(existingMembers, Formatting.Indented);
+
+            WriteFile(existingMembersJson);
+        }
+
+        public void EditBoat(string newType, double newLength)
+        {
+            string jsonFile = ReadFile();
+
+            List<Member> existingMembers = JsonConvert.DeserializeObject<List<Member>>(jsonFile);
+
+            Member memberToEdit = existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
+            Boat boatToEdit = memberToEdit.Boats.Where(boat => boat.Id == SelectedBoatId).ToList()[0];
+
+            boatToEdit.Type = newType;
+            boatToEdit.Length = newLength;
 
             string existingMembersJson = JsonConvert.SerializeObject(existingMembers, Formatting.Indented);
 
