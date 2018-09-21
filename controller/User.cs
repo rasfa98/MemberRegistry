@@ -44,6 +44,11 @@ namespace MemberRegistry.controller
                     selectMember.SaveSelectedMemberId();
                     editMember.Display();
                     break;
+                case ConsoleKey.D4:
+                    selectMember.Display();
+                    selectMember.SaveSelectedMemberId();
+                    registry.DeleteMember();
+                    break;
             }
         }
     }

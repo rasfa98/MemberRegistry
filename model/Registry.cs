@@ -50,6 +50,19 @@ namespace MemberRegistry.model
             WriteFile(existingMembersJson);
         }
 
+        public void DeleteMember()
+        {
+            string jsonFile = ReadFile();
+
+            List<Member> existingMembers = JsonConvert.DeserializeObject<List<Member>>(jsonFile);
+
+            List<Member> modifiedList = existingMembers.Where(member => member.Id != SelectedMemberId).ToList();
+
+            string modifiedListJson = JsonConvert.SerializeObject(modifiedList, Formatting.Indented);
+
+            WriteFile(modifiedListJson);
+        }
+
         public List<Member> ViewAll()
         {
             string jsonFile = ReadFile();
