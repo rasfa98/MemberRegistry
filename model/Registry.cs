@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace MemberRegistry.model
@@ -20,6 +21,20 @@ namespace MemberRegistry.model
             string existingMembersJson = JsonConvert.SerializeObject(existingMembers, Formatting.Indented);
 
             WriteFile(existingMembersJson);
+        }
+
+        public Member ViewMember(Guid memberId)
+        {
+            string jsonFile = ReadFile();
+
+            List<Member> existingMembers = JsonConvert.DeserializeObject<List<Member>>(jsonFile);
+
+            return existingMembers.Where(member => member.Id == memberId).ToList()[0];
+        }
+
+        public void EditMember(Guid memberId, string newName, string NewPersonalNumber)
+        {
+            // TODO: Edit members information
         }
 
         private string ReadFile()
