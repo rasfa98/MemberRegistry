@@ -10,6 +10,7 @@ namespace MemberRegistry.controller
         private view.ViewMember viewMember;
         private view.EditMember editMember;
         private view.SelectMember selectMember;
+        private view.ListMembers listMembers;
 
         public User()
         {
@@ -19,12 +20,16 @@ namespace MemberRegistry.controller
             viewMember = new view.ViewMember(registry);
             editMember = new view.EditMember(registry);
             selectMember = new view.SelectMember(registry);
+            listMembers = new view.ListMembers(registry);
         }
 
         public void Initialize()
         {
-            menu.Display();
-            HandleMenuSelection();
+            while (true)
+            {
+                menu.Display();
+                HandleMenuSelection();
+            }
         }
 
         private void HandleMenuSelection()
@@ -49,6 +54,24 @@ namespace MemberRegistry.controller
                     selectMember.SaveSelectedMemberId();
                     registry.DeleteMember();
                     break;
+                case ConsoleKey.D5:
+                    HandleListMembers();
+                    break;
+            }
+        }
+
+        public void HandleListMembers()
+        {
+            while (true)
+            {
+                listMembers.Display();
+
+                switch (listMembers.GetUserInput())
+                {
+                    case ConsoleKey.T:
+                        listMembers.ToggleListType();
+                        break;
+                }
             }
         }
     }

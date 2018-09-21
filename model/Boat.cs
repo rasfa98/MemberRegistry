@@ -2,7 +2,7 @@ namespace MemberRegistry.model
 {
     class Boat
     {
-        private string type;
-        private double length;
+        public string Type { get; set; }
+        public double Length { get; set; }
     }
 }
