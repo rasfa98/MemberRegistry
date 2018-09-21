@@ -22,9 +22,9 @@ namespace MemberRegistry.view
             Console.WriteLine("8) Delete boat");
         }
 
-        public bool UserWantsToCreateMember()
+        public ConsoleKey UserSelection()
         {
-            return Console.ReadKey().Key == ConsoleKey.D1;
+            return Console.ReadKey().Key;
         }
     }
 }
