@@ -63,6 +63,23 @@ namespace MemberRegistry.model
             WriteFile(modifiedListJson);
         }
 
+        public void AddBoat(Guid id, string type, double length)
+        {
+            string jsonFile = ReadFile();
+
+            List<Member> existingMembers = JsonConvert.DeserializeObject<List<Member>>(jsonFile);
+
+            Member memberToAddBoat = existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
+
+            Boat newBoat = new Boat(id, type, length);
+
+            memberToAddBoat.Boats.Add(newBoat);
+
+            string existingMembersJson = JsonConvert.SerializeObject(existingMembers, Formatting.Indented);
+
+            WriteFile(existingMembersJson);
+        }
+
         public List<Member> ViewAll()
         {
             string jsonFile = ReadFile();

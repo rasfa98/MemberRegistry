@@ -11,6 +11,7 @@ namespace MemberRegistry.controller
         private view.EditMember editMember;
         private view.SelectMember selectMember;
         private view.ListMembers listMembers;
+        private view.RegisterBoat registerBoat;
 
         public User()
         {
@@ -21,6 +22,7 @@ namespace MemberRegistry.controller
             editMember = new view.EditMember(registry);
             selectMember = new view.SelectMember(registry);
             listMembers = new view.ListMembers(registry);
+            registerBoat = new view.RegisterBoat(registry);
         }
 
         public void Initialize()
@@ -56,6 +58,11 @@ namespace MemberRegistry.controller
                     break;
                 case ConsoleKey.D5:
                     HandleListMembers();
+                    break;
+                case ConsoleKey.D6:
+                    selectMember.Display();
+                    selectMember.SaveSelectedMemberId();
+                    registerBoat.Display();
                     break;
             }
         }
