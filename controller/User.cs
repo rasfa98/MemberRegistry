@@ -7,12 +7,14 @@ namespace MemberRegistry.controller
         private view.Menu menu;
         private view.CreateMember createMember;
         private view.ViewMember viewMember;
+        private view.EditMember editMember;
 
         public User()
         {
             menu = new view.Menu();
             createMember = new view.CreateMember();
             viewMember = new view.ViewMember();
+            editMember = new view.EditMember();
         }
 
         public void Initialize()
@@ -30,6 +32,9 @@ namespace MemberRegistry.controller
                     break;
                 case ConsoleKey.D2:
                     viewMember.Display();
+                    break;
+                case ConsoleKey.D3:
+                    editMember.Display();
                     break;
             }
         }
