@@ -19,7 +19,9 @@ namespace MemberRegistry.view
             members = registry.ViewAll();
 
             Console.WriteLine("Select a member");
-            Console.WriteLine("");
+            Console.WriteLine();
+            Console.WriteLine("(write the number of the member you would like to select)");
+            Console.WriteLine();
 
             for (int i = 0; i < members.Count; i++)
             {
