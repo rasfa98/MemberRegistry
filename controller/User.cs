@@ -37,7 +37,9 @@ namespace MemberRegistry.controller
                 {
                     menu.Display();
                     HandleMenuSelection();
-                } catch (Exception) {
+                }
+                catch (Exception)
+                {
                     continue;
                 }
             }
@@ -84,6 +86,10 @@ namespace MemberRegistry.controller
                     selectBoat.Display();
                     selectBoat.SaveSelectedBoatId();
                     registry.DeleteBoat();
+                    break;
+                case ConsoleKey.Q:
+                    Console.Clear();
+                    Environment.Exit(0);
                     break;
             }
         }

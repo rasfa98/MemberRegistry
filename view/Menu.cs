@@ -20,6 +20,8 @@ namespace MemberRegistry.view
             Console.WriteLine("6) Register boat");
             Console.WriteLine("7) Edit boat information");
             Console.WriteLine("8) Delete boat");
+            Console.WriteLine();
+            Console.WriteLine("Q) Quit");
         }
 
         public ConsoleKey GetUserSelection()
