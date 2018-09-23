@@ -94,7 +94,7 @@ namespace MemberRegistry.controller
             }
         }
 
-        public void HandleListMembers()
+        private void HandleListMembers()
         {
             ConsoleKey pressedKey = default(ConsoleKey);
 
@@ -113,7 +113,7 @@ namespace MemberRegistry.controller
             }
         }
 
-        public void HandleViewMember()
+        private void HandleViewMember()
         {
             ConsoleKey pressedKey = default(ConsoleKey);
 
