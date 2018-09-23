@@ -1,0 +1,14 @@
+title Create member
+
+Program->C.User: Initialize()
+
+loop while (true)
+    C.User->V.Menu: Display()
+    C.User->V.Menu: GetUserSelection()
+    V.Menu-->C.User: userSelection 
+    
+    alt userSelection == ConsoleKey.D1
+    C.User->V.CreateMember: Display()
+    V.CreateMember->M.Registry: AddMember(id, name, personalNumber)
+    end 
+end
