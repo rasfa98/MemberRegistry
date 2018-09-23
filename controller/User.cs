@@ -45,7 +45,7 @@ namespace MemberRegistry.controller
 
         private void HandleMenuSelection()
         {
-            switch (menu.UserSelection())
+            switch (menu.GetUserSelection())
             {
                 case ConsoleKey.D1:
                     createMember.Display();

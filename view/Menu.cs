@@ -22,7 +22,7 @@ namespace MemberRegistry.view
             Console.WriteLine("8) Delete boat");
         }
 
-        public ConsoleKey UserSelection()
+        public ConsoleKey GetUserSelection()
         {
             return Console.ReadKey().Key;
         }
