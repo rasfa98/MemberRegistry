@@ -33,8 +33,13 @@ namespace MemberRegistry.controller
         {
             while (true)
             {
-                menu.Display();
-                HandleMenuSelection();
+                try
+                {
+                    menu.Display();
+                    HandleMenuSelection();
+                } catch (Exception) {
+                    continue;
+                }
             }
         }
 
