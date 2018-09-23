@@ -46,9 +46,7 @@ namespace MemberRegistry.controller
                     createMember.Display();
                     break;
                 case ConsoleKey.D2:
-                    selectMember.Display();
-                    selectMember.SaveSelectedMemberId();
-                    viewMember.Display();
+                    HandleViewMember();
                     break;
                 case ConsoleKey.D3:
                     selectMember.Display();
@@ -87,16 +85,35 @@ namespace MemberRegistry.controller
 
         public void HandleListMembers()
         {
-            while (true)
+            ConsoleKey pressedKey = default(ConsoleKey);
+
+            while (pressedKey != ConsoleKey.B)
             {
                 listMembers.Display();
 
-                switch (listMembers.GetUserInput())
+                pressedKey = listMembers.GetUserInput();
+
+                switch (pressedKey)
                 {
                     case ConsoleKey.T:
                         listMembers.ToggleListType();
                         break;
                 }
+            }
+        }
+
+        public void HandleViewMember()
+        {
+            ConsoleKey pressedKey = default(ConsoleKey);
+
+            selectMember.Display();
+            selectMember.SaveSelectedMemberId();
+
+            while (pressedKey != ConsoleKey.B)
+            {
+                viewMember.Display();
+
+                pressedKey = viewMember.GetUserInput();
             }
         }
     }

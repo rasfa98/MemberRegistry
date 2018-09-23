@@ -45,6 +45,8 @@ namespace MemberRegistry.view
                     Console.WriteLine();
                 }
             }
+
+            Console.WriteLine("T) Toggle list type    B) Go back");
         }
 
         public void ToggleListType()

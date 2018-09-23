@@ -21,6 +21,14 @@ namespace MemberRegistry.view
             Console.WriteLine();
 
             Console.WriteLine(member.Name + "    " + member.PersonalNumber + "    " + member.Id);
+
+            Console.WriteLine();
+            Console.WriteLine("B) Go back");
+        }
+
+        public ConsoleKey GetUserInput()
+        {
+            return Console.ReadKey().Key;
         }
     }
 }
