@@ -1,0 +1,21 @@
+title View member
+
+Program->C.User: Initialize()
+
+loop while (true)
+    C.User->V.Menu: Display()
+    C.User->V.Menu: GetUserSelection()
+    V.Menu-->C.User: userSelection 
+    
+    alt userSelection == ConsoleKey.D2
+    C.User->C.User: HandleViewMember()
+    C.User->V.SelectMember: Display()
+    C.User->V.SelectMember: SaveSelectedMemberId()
+    
+        loop pressedKey != ConsoleKey.B
+        C.User->V.ViewMember: Display()
+        C.User->V.ViewMember: GetUserInput()
+        V.ViewMember-->C.User: pressedKey
+        end
+    end 
+end
