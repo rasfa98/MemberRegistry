@@ -22,6 +22,14 @@ namespace MemberRegistry.view
 
             Console.WriteLine(member.Name + "    " + member.PersonalNumber + "    " + member.Id);
 
+            if (member.Boats.Count > 0)
+            {
+                foreach (model.Boat boat in member.Boats)
+                {
+                    Console.WriteLine("    " + boat.Type + "    " + boat.Length);
+                }
+            }
+
             Console.WriteLine();
             Console.WriteLine("B) Go back");
         }
