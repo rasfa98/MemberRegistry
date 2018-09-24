@@ -2,7 +2,6 @@ namespace MemberRegistry.view
 {
     class BaseView
     {
-        public model.Registry registry { get; set; }
         public view.Menu menu { get; set; }
         public view.CreateMember createMember { get; set; }
         public view.ViewMember viewMember { get; set; }
@@ -15,7 +14,6 @@ namespace MemberRegistry.view
 
         public BaseView()
         {
-            registry = new model.Registry();
             menu = new view.Menu();
             createMember = new view.CreateMember();
             viewMember = new view.ViewMember();

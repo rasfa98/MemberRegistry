@@ -2,7 +2,7 @@ using System;
 
 namespace MemberRegistry.view
 {
-    class CreateMember
+    class CreateMember : BaseView
     {
         private string name;
         private string personalNumber;
