@@ -5,25 +5,21 @@ namespace MemberRegistry.view
 {
     class ListMembers
     {
-        private model.Registry registry;
         private bool compactList;
 
-        public ListMembers(model.Registry registry)
+        public ListMembers()
         {
-            this.registry = registry;
             compactList = true;
         }
 
-        public void Display()
+        public void Display(List<model.Member> membersToList)
         {
-            List<model.Member> members = registry.ViewAll();
-
             Console.Clear();
 
             Console.WriteLine("List members");
             Console.WriteLine();
 
-            foreach (model.Member member in members)
+            foreach (model.Member member in membersToList)
             {
                 if (compactList)
                 {

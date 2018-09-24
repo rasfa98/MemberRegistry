@@ -4,12 +4,8 @@ namespace MemberRegistry.view
 {
     class CreateMember
     {
-        private model.Registry registry;
-
-        public CreateMember(model.Registry registry)
-        {
-            this.registry = registry;
-        }
+        private string name;
+        private string personalNumber;
 
         public void Display()
         {
@@ -19,12 +15,20 @@ namespace MemberRegistry.view
             Console.WriteLine();
 
             Console.Write("Name: ");
-            string name = Console.ReadLine();
+            name = Console.ReadLine();
 
             Console.Write("Personal number: ");
-            string personalNumber = Console.ReadLine();
+            personalNumber = Console.ReadLine();
+        }
 
-            registry.AddMember(Guid.NewGuid(), name, personalNumber);
+        public string GetName()
+        {
+            return name;
+        }
+
+        public string GetPersonalNumber()
+        {
+            return personalNumber;
         }
     }
 }

@@ -4,12 +4,8 @@ namespace MemberRegistry.view
 {
     class EditMember
     {
-        private model.Registry registry;
-
-        public EditMember(model.Registry registry)
-        {
-            this.registry = registry;
-        }
+        private string name;
+        private string personalNumber;
 
         public void Display()
         {
@@ -19,12 +15,20 @@ namespace MemberRegistry.view
             Console.WriteLine();
 
             Console.Write("New name: ");
-            string name = Console.ReadLine();
+            name = Console.ReadLine();
 
             Console.Write("New personal number: ");
-            string personalNumber = Console.ReadLine();
+            personalNumber = Console.ReadLine();
+        }
 
-            registry.EditMember(name, personalNumber);
+        public string GetName()
+        {
+            return name;
+        }
+
+        public string GetPersonalNumber()
+        {
+            return personalNumber;
         }
     }
 }

@@ -4,12 +4,8 @@ namespace MemberRegistry.view
 {
     class EditBoat
     {
-        private model.Registry registry;
-
-        public EditBoat(model.Registry registry)
-        {
-            this.registry = registry;
-        }
+        private string type;
+        private double length;
 
         public void Display()
         {
@@ -19,12 +15,20 @@ namespace MemberRegistry.view
             Console.WriteLine();
 
             Console.Write("New type: ");
-            string type = Console.ReadLine();
+            type = Console.ReadLine();
 
             Console.Write("New length: ");
-            double length = double.Parse(Console.ReadLine());
+            length = double.Parse(Console.ReadLine());
+        }
 
-            registry.EditBoat(type, length);
+        public string GetBoatType()
+        {
+            return type;
+        }
+
+        public double GetBoatLength()
+        {
+            return length;
         }
     }
 }

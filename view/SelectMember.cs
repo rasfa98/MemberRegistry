@@ -5,38 +5,27 @@ namespace MemberRegistry.view
 {
     class SelectMember
     {
-        private model.Registry registry;
-        private List<model.Member> members;
-
-        public SelectMember(model.Registry registry)
-        {
-            this.registry = registry;
-        }
-        public void Display()
+        public void Display(List<model.Member> membersToList)
         {
             Console.Clear();
-
-            members = registry.ViewAll();
 
             Console.WriteLine("Select a member");
             Console.WriteLine();
             Console.WriteLine("(write the number of the member you would like to select)");
             Console.WriteLine();
 
-            for (int i = 0; i < members.Count; i++)
+            for (int i = 0; i < membersToList.Count; i++)
             {
-                Console.WriteLine(i + ") " + members[i].Name + "    " + members[i].PersonalNumber + "    " + members[i].Id);
+                Console.WriteLine(i + ") " + membersToList[i].Name + "    " + membersToList[i].PersonalNumber + "    " + membersToList[i].Id);
             }
         }
 
-        public void SaveSelectedMemberId()
+        public int GetSelectedMemberListIndex()
         {
             Console.WriteLine();
             Console.Write("Member to select: ");
 
-            int memberListIndex = Convert.ToInt32(Console.ReadLine());
-
-            registry.SelectedMemberId = members[memberListIndex].Id;
+            return Convert.ToInt32(Console.ReadLine());
         }
     }
 }

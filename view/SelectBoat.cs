@@ -5,38 +5,27 @@ namespace MemberRegistry.view
 {
     class SelectBoat
     {
-        private model.Registry registry;
-        private List<model.Boat> boats;
-
-        public SelectBoat(model.Registry registry)
-        {
-            this.registry = registry;
-        }
-        public void Display()
+        public void Display(List<model.Boat> boatsToList)
         {
             Console.Clear();
-
-            boats = registry.ViewMember().Boats;
 
             Console.WriteLine("Select a boat");
             Console.WriteLine();
             Console.WriteLine("(write the number of the boat you would like to select)");
             Console.WriteLine();
 
-            for (int i = 0; i < boats.Count; i++)
+            for (int i = 0; i < boatsToList.Count; i++)
             {
-                Console.WriteLine(i + ") " + boats[i].Type + "    " + boats[i].Length + "    " + boats[i].Id);
+                Console.WriteLine(i + ") " + boatsToList[i].Type + "    " + boatsToList[i].Length + "    " + boatsToList[i].Id);
             }
         }
 
-        public void SaveSelectedBoatId()
+        public int GetlSelectedBoatListIndex()
         {
             Console.WriteLine();
             Console.Write("Boat to select: ");
 
-            int boatListIndex = Convert.ToInt32(Console.ReadLine());
-
-            registry.SelectedBoatId = boats[boatListIndex].Id;
+            return Convert.ToInt32(Console.ReadLine());
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace MemberRegistry.controller
 {
@@ -19,14 +20,14 @@ namespace MemberRegistry.controller
         {
             registry = new model.Registry();
             menu = new view.Menu();
-            createMember = new view.CreateMember(registry);
-            viewMember = new view.ViewMember(registry);
-            editMember = new view.EditMember(registry);
-            selectMember = new view.SelectMember(registry);
-            listMembers = new view.ListMembers(registry);
-            registerBoat = new view.RegisterBoat(registry);
-            selectBoat = new view.SelectBoat(registry);
-            editBoat = new view.EditBoat(registry);
+            createMember = new view.CreateMember();
+            viewMember = new view.ViewMember();
+            editMember = new view.EditMember();
+            selectMember = new view.SelectMember();
+            listMembers = new view.ListMembers();
+            registerBoat = new view.RegisterBoat();
+            selectBoat = new view.SelectBoat();
+            editBoat = new view.EditBoat();
         }
 
         public void Initialize()
@@ -51,40 +52,53 @@ namespace MemberRegistry.controller
             {
                 case ConsoleKey.D1:
                     createMember.Display();
+
+                    string name = createMember.GetName();
+                    string personalNumber = createMember.GetPersonalNumber();
+
+                    registry.AddMember(Guid.NewGuid(), name, personalNumber);
                     break;
                 case ConsoleKey.D2:
                     HandleViewMember();
                     break;
                 case ConsoleKey.D3:
-                    selectMember.Display();
-                    selectMember.SaveSelectedMemberId();
+                    HandleSelectMember();
                     editMember.Display();
+
+                    string newName = editMember.GetName();
+                    string newPersonalNumber = editMember.GetPersonalNumber();
+
+                    registry.EditMember(newName, newPersonalNumber);
                     break;
                 case ConsoleKey.D4:
-                    selectMember.Display();
-                    selectMember.SaveSelectedMemberId();
+                    HandleSelectMember();
                     registry.DeleteMember();
                     break;
                 case ConsoleKey.D5:
                     HandleListMembers();
                     break;
                 case ConsoleKey.D6:
-                    selectMember.Display();
-                    selectMember.SaveSelectedMemberId();
+                    HandleSelectMember();
                     registerBoat.Display();
+
+                    string type = registerBoat.GetBoatType();
+                    double length = registerBoat.GetBoatLength();
+
+                    registry.AddBoat(Guid.NewGuid(), type, length);
                     break;
                 case ConsoleKey.D7:
-                    selectMember.Display();
-                    selectMember.SaveSelectedMemberId();
-                    selectBoat.Display();
-                    selectBoat.SaveSelectedBoatId();
+                    HandleSelectMember();
+                    HandleSelectBoat();
                     editBoat.Display();
+
+                    string newType = editBoat.GetBoatType();
+                    double newLength = editBoat.GetBoatLength();
+
+                    registry.EditBoat(newType, newLength);
                     break;
                 case ConsoleKey.D8:
-                    selectMember.Display();
-                    selectMember.SaveSelectedMemberId();
-                    selectBoat.Display();
-                    selectBoat.SaveSelectedBoatId();
+                    HandleSelectMember();
+                    HandleSelectBoat();
                     registry.DeleteBoat();
                     break;
                 case ConsoleKey.Q:
@@ -100,7 +114,9 @@ namespace MemberRegistry.controller
 
             while (pressedKey != ConsoleKey.B)
             {
-                listMembers.Display();
+                List<model.Member> membersToList = registry.ViewAll();
+
+                listMembers.Display(membersToList);
 
                 pressedKey = listMembers.GetUserInput();
 
@@ -117,15 +133,38 @@ namespace MemberRegistry.controller
         {
             ConsoleKey pressedKey = default(ConsoleKey);
 
-            selectMember.Display();
-            selectMember.SaveSelectedMemberId();
+            HandleSelectMember();
 
             while (pressedKey != ConsoleKey.B)
             {
-                viewMember.Display();
+                model.Member memberToView = registry.ViewMember();
+
+                viewMember.Display(memberToView);
 
                 pressedKey = viewMember.GetUserInput();
             }
+        }
+
+        private void HandleSelectBoat()
+        {
+            List<model.Boat> boatsToList = registry.ViewMember().Boats;
+
+            selectBoat.Display(boatsToList);
+
+            int selectedBoatIndex = selectBoat.GetlSelectedBoatListIndex();
+
+            registry.SelectedBoatId = boatsToList[selectedBoatIndex].Id;
+        }
+
+        private void HandleSelectMember()
+        {
+            List<model.Member> membersToList = registry.ViewAll();
+
+            selectMember.Display(membersToList);
+
+            int selectedMemberListIndex = selectMember.GetSelectedMemberListIndex();
+
+            registry.SelectedMemberId = membersToList[selectedMemberListIndex].Id;
         }
     }
 }
