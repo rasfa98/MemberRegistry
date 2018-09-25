@@ -5,13 +5,29 @@ namespace MemberRegistry.controller
 {
     class User
     {
-        private view.BaseView baseView;
         private model.Registry registry;
+        private view.Menu menu;
+        private view.CreateMember createMember;
+        private view.ViewMember viewMember;
+        private view.EditMember editMember;
+        private view.SelectMember selectMember;
+        private view.ListMembers listMembers;
+        private view.RegisterBoat registerBoat;
+        private view.SelectBoat selectBoat;
+        private view.EditBoat editBoat;
 
         public User()
         {
-            baseView = new view.BaseView();
             registry = new model.Registry();
+            menu = new view.Menu();
+            createMember = new view.CreateMember();
+            viewMember = new view.ViewMember();
+            editMember = new view.EditMember();
+            selectMember = new view.SelectMember();
+            listMembers = new view.ListMembers();
+            registerBoat = new view.RegisterBoat();
+            selectBoat = new view.SelectBoat();
+            editBoat = new view.EditBoat();
         }
 
         public void Initialize()
@@ -20,7 +36,7 @@ namespace MemberRegistry.controller
             {
                 try
                 {
-                    baseView.menu.Display();
+                    menu.Display();
                     HandleMenuSelection();
                 }
                 catch (Exception)
@@ -32,13 +48,13 @@ namespace MemberRegistry.controller
 
         private void HandleMenuSelection()
         {
-            switch (baseView.menu.GetUserSelection())
+            switch (menu.GetUserSelection())
             {
                 case ConsoleKey.D1:
-                    baseView.createMember.Display();
+                    createMember.Display();
 
-                    string name = baseView.createMember.GetName();
-                    string personalNumber = baseView.createMember.GetPersonalNumber();
+                    string name = createMember.GetName();
+                    string personalNumber = createMember.GetPersonalNumber();
 
                     registry.AddMember(Guid.NewGuid(), name, personalNumber);
                     break;
@@ -47,10 +63,10 @@ namespace MemberRegistry.controller
                     break;
                 case ConsoleKey.D3:
                     HandleSelectMember();
-                    baseView.editMember.Display();
+                    editMember.Display();
 
-                    string newName = baseView.editMember.GetName();
-                    string newPersonalNumber = baseView.editMember.GetPersonalNumber();
+                    string newName = editMember.GetName();
+                    string newPersonalNumber = editMember.GetPersonalNumber();
 
                     registry.EditMember(newName, newPersonalNumber);
                     break;
@@ -63,20 +79,20 @@ namespace MemberRegistry.controller
                     break;
                 case ConsoleKey.D6:
                     HandleSelectMember();
-                    baseView.registerBoat.Display();
+                    registerBoat.Display();
 
-                    string type = baseView.registerBoat.GetBoatType();
-                    double length = baseView.registerBoat.GetBoatLength();
+                    string type = registerBoat.GetBoatType();
+                    double length = registerBoat.GetBoatLength();
 
                     registry.AddBoat(Guid.NewGuid(), type, length);
                     break;
                 case ConsoleKey.D7:
                     HandleSelectMember();
                     HandleSelectBoat();
-                    baseView.editBoat.Display();
+                    editBoat.Display();
 
-                    string newType = baseView.editBoat.GetBoatType();
-                    double newLength = baseView.editBoat.GetBoatLength();
+                    string newType = editBoat.GetBoatType();
+                    double newLength = editBoat.GetBoatLength();
 
                     registry.EditBoat(newType, newLength);
                     break;
@@ -100,14 +116,14 @@ namespace MemberRegistry.controller
             {
                 List<model.Member> membersToList = registry.ViewAll();
 
-                baseView.listMembers.Display(membersToList);
+                listMembers.Display(membersToList);
 
-                pressedKey = baseView.listMembers.GetUserInput();
+                pressedKey = listMembers.GetUserInput();
 
                 switch (pressedKey)
                 {
                     case ConsoleKey.T:
-                        baseView.listMembers.ToggleListType();
+                        listMembers.ToggleListType();
                         break;
                 }
             }
@@ -123,9 +139,9 @@ namespace MemberRegistry.controller
             {
                 model.Member memberToView = registry.ViewMember();
 
-                baseView.viewMember.Display(memberToView);
+                viewMember.Display(memberToView);
 
-                pressedKey = baseView.viewMember.GetUserInput();
+                pressedKey = viewMember.GetUserInput();
             }
         }
 
@@ -133,9 +149,9 @@ namespace MemberRegistry.controller
         {
             List<model.Boat> boatsToList = registry.ViewMember().Boats;
 
-            baseView.selectBoat.Display(boatsToList);
+            selectBoat.Display(boatsToList);
 
-            int selectedBoatIndex = baseView.selectBoat.GetlSelectedBoatListIndex();
+            int selectedBoatIndex = selectBoat.GetlSelectedBoatListIndex();
 
             registry.SelectedBoatId = boatsToList[selectedBoatIndex].Id;
         }
@@ -144,9 +160,9 @@ namespace MemberRegistry.controller
         {
             List<model.Member> membersToList = registry.ViewAll();
 
-            baseView.selectMember.Display(membersToList);
+            selectMember.Display(membersToList);
 
-            int selectedMemberListIndex = baseView.selectMember.GetSelectedMemberListIndex();
+            int selectedMemberListIndex = selectMember.GetSelectedMemberListIndex();
 
             registry.SelectedMemberId = membersToList[selectedMemberListIndex].Id;
         }
