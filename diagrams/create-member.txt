@@ -1,14 +1,28 @@
 title Create member
 
-Program->C.User: Initialize()
+Program->controller.User: Initialize()
 
-loop while (true)
-    C.User->V.Menu: Display()
-    C.User->V.Menu: GetUserSelection()
-    V.Menu-->C.User: userSelection 
+loop while true
+    controller.User->view.Menu: Display()
+    controller.User->controller.User: HandleMenuSelection()
+    controller.User->view.Menu: GetUserSelection()
+    view.Menu-->controller.User: userSelection 
     
     alt userSelection == ConsoleKey.D1
-    C.User->V.CreateMember: Display()
-    V.CreateMember->M.Registry: AddMember(id, name, personalNumber)
+    controller.User->controller.User: HandleCreateMember()
+    controller.User->view.CreateMember: Display()
+    controller.User->view.CreateMember: GetName()
+    view.CreateMember-->controller.User: name
+    controller.User->view.CreateMember: GetPersonalNumber()
+    view.CreateMember-->controller.User: personalNumber
+    controller.User->model.Registry: AddMember(Guid.newGuid(), name, personalNumber)
+    model.Registry->model.Registry: ReadFile()
+    model.Registry->io.File: ReadAllText("data.json")
+    io.File-->model.Registry: jsonFile
+    model.Registry->Newtonsoft.JsonConvert: DeserializeObject(jsonFile)
+    Newtonsoft.JsonConvert-->model.Registry: existingMembers
+    model.Registry->Collections.List: existingMembers.Add(id, name, personalNumber)
+    model.Registry->model.Registry: WriteFile(existingMembers)
+    model.Registry->Newtonsoft.JsonConvert: SerializeObject(existingMembers, Formatting.Indented)
     end 
 end

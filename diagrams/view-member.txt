@@ -1,21 +1,41 @@
 title View member
 
-Program->C.User: Initialize()
+Program->controller.User: Initialize()
 
-loop while (true)
-    C.User->V.Menu: Display()
-    C.User->V.Menu: GetUserSelection()
-    V.Menu-->C.User: userSelection 
+loop while true
+    controller.User->view.Menu: Display()
+    controller.User->controller.User: HandleMenuSelection()
+    controller.User->view.Menu: GetUserSelection()
+    view.Menu-->controller.User: userSelection 
     
     alt userSelection == ConsoleKey.D2
-    C.User->C.User: HandleViewMember()
-    C.User->V.SelectMember: Display()
-    C.User->V.SelectMember: SaveSelectedMemberId()
+    controller.User->controller.User: HandleViewMember()
+    controller.User->controller.User: HandleSelectMember()
+    controller.User->model.Registry: GetAllMembers()
+    model.Registry->model.Registry: ReadFile()
+    model.Registry->io.File: ReadAllText("data.json")
+    io.File-->model.Registry: jsonFile
+    model.Registry->Newtonsoft.JsonConvert: DeserializeObject(jsonFile)
+    Newtonsoft.JsonConvert-->model.Registry: existingMembers
+    model.Registry-->controller.User: existingMembers
+    controller.User->view.SelectMember: Display(existingMembers)
+    controller.User->view.SelectMember: GetSelectedMemberListIndex()
+    view.SelectMember-->controller.User: selectedMemberListIndex
+    controller.User->model.Registry: SelectedMemberId = selectedMemberListIndex
     
-        loop pressedKey != ConsoleKey.B
-        C.User->V.ViewMember: Display()
-        C.User->V.ViewMember: GetUserInput()
-        V.ViewMember-->C.User: pressedKey
-        end
+    loop while pressedKey != ConsoleKey.B
+        controller.User->model.Registry: GetMember()
+        model.Registry->model.Registry: ReadFile()
+        model.Registry->io.File: ReadAllText("data.json")
+        io.File-->model.Registry: jsonFile
+        model.Registry->Newtonsoft.JsonConvert: DeserializeObject(jsonFile)
+        Newtonsoft.JsonConvert-->model.Registry: existingMembers
+        model.Registry->Linq: existingMembers.Where(member.Id == SelectedMemberId)
+        Linq-->model.Registry: memberToView
+        model.Registry-->controller.User: memberToView
+        controller.User->view.ViewMember: Display(memberToView)
+        controller.User->view.ViewMember: GetUserInput()
+        view.ViewMember-->controller.User: pressedKey
+    end
     end 
 end
