@@ -51,61 +51,65 @@ namespace MemberRegistry.controller
             switch (menu.GetUserSelection())
             {
                 case ConsoleKey.D1:
-                    createMember.Display();
-
-                    string name = createMember.GetName();
-                    string personalNumber = createMember.GetPersonalNumber();
-
-                    registry.AddMember(Guid.NewGuid(), name, personalNumber);
+                    HandleCreateMember();
                     break;
                 case ConsoleKey.D2:
                     HandleViewMember();
                     break;
                 case ConsoleKey.D3:
-                    HandleSelectMember();
-                    editMember.Display();
-
-                    string newName = editMember.GetName();
-                    string newPersonalNumber = editMember.GetPersonalNumber();
-
-                    registry.EditMember(newName, newPersonalNumber);
+                    HandleEditMember();
                     break;
                 case ConsoleKey.D4:
-                    HandleSelectMember();
-                    registry.DeleteMember();
+                    HandleDeleteMember();
                     break;
                 case ConsoleKey.D5:
                     HandleListMembers();
                     break;
                 case ConsoleKey.D6:
-                    HandleSelectMember();
-                    registerBoat.Display();
-
-                    string type = registerBoat.GetBoatType();
-                    double length = registerBoat.GetBoatLength();
-
-                    registry.AddBoat(Guid.NewGuid(), type, length);
+                    HandleRegisterBoat();
                     break;
                 case ConsoleKey.D7:
-                    HandleSelectMember();
-                    HandleSelectBoat();
-                    editBoat.Display();
-
-                    string newType = editBoat.GetBoatType();
-                    double newLength = editBoat.GetBoatLength();
-
-                    registry.EditBoat(newType, newLength);
+                    HandleEditBoat();
                     break;
                 case ConsoleKey.D8:
-                    HandleSelectMember();
-                    HandleSelectBoat();
-                    registry.DeleteBoat();
+                    HandleDeleteBoat();
                     break;
                 case ConsoleKey.Q:
-                    Console.Clear();
-                    Environment.Exit(0);
+                    HandleQuitApplication();
                     break;
             }
+        }
+
+        private void HandleCreateMember()
+        {
+            createMember.Display();
+
+            string name = createMember.GetName();
+            string personalNumber = createMember.GetPersonalNumber();
+
+            registry.AddMember(Guid.NewGuid(), name, personalNumber);
+        }
+
+        private void HandleEditMember()
+        {
+            HandleSelectMember();
+            editMember.Display();
+
+            string newName = editMember.GetName();
+            string newPersonalNumber = editMember.GetPersonalNumber();
+
+            registry.EditMember(newName, newPersonalNumber);
+        }
+
+        private void HandleRegisterBoat()
+        {
+            HandleSelectMember();
+            registerBoat.Display();
+
+            string type = registerBoat.GetBoatType();
+            double length = registerBoat.GetBoatLength();
+
+            registry.AddBoat(Guid.NewGuid(), type, length);
         }
 
         private void HandleListMembers()
@@ -114,7 +118,7 @@ namespace MemberRegistry.controller
 
             while (pressedKey != ConsoleKey.B)
             {
-                List<model.Member> membersToList = registry.ViewAll();
+                List<model.Member> membersToList = registry.GetAllMembers();
 
                 listMembers.Display(membersToList);
 
@@ -129,6 +133,12 @@ namespace MemberRegistry.controller
             }
         }
 
+        private void HandleDeleteMember()
+        {
+            HandleSelectMember();
+            registry.DeleteMember();
+        }
+
         private void HandleViewMember()
         {
             ConsoleKey pressedKey = default(ConsoleKey);
@@ -137,7 +147,7 @@ namespace MemberRegistry.controller
 
             while (pressedKey != ConsoleKey.B)
             {
-                model.Member memberToView = registry.ViewMember();
+                model.Member memberToView = registry.GetMember();
 
                 viewMember.Display(memberToView);
 
@@ -147,24 +157,49 @@ namespace MemberRegistry.controller
 
         private void HandleSelectBoat()
         {
-            List<model.Boat> boatsToList = registry.ViewMember().Boats;
+            List<model.Boat> boatsToList = registry.GetMember().Boats;
 
             selectBoat.Display(boatsToList);
 
-            int selectedBoatIndex = selectBoat.GetlSelectedBoatListIndex();
+            int selectedBoatIndex = Convert.ToInt32(selectBoat.GetlSelectedBoatListIndex());
 
             registry.SelectedBoatId = boatsToList[selectedBoatIndex].Id;
         }
 
         private void HandleSelectMember()
         {
-            List<model.Member> membersToList = registry.ViewAll();
+            List<model.Member> membersToList = registry.GetAllMembers();
 
             selectMember.Display(membersToList);
 
-            int selectedMemberListIndex = selectMember.GetSelectedMemberListIndex();
+            int selectedMemberListIndex = Convert.ToInt32(selectMember.GetSelectedMemberListIndex());
 
             registry.SelectedMemberId = membersToList[selectedMemberListIndex].Id;
+        }
+
+        private void HandleEditBoat()
+        {
+            HandleSelectMember();
+            HandleSelectBoat();
+            editBoat.Display();
+
+            string newType = editBoat.GetBoatType();
+            double newLength = editBoat.GetBoatLength();
+
+            registry.EditBoat(newType, newLength);
+        }
+
+        private void HandleDeleteBoat()
+        {
+            HandleSelectMember();
+            HandleSelectBoat();
+            registry.DeleteBoat();
+        }
+
+        private void HandleQuitApplication()
+        {
+            Console.Clear();
+            Environment.Exit(0);
         }
     }
 }

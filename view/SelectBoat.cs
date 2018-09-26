@@ -20,12 +20,12 @@ namespace MemberRegistry.view
             }
         }
 
-        public int GetlSelectedBoatListIndex()
+        public string GetlSelectedBoatListIndex()
         {
             Console.WriteLine();
             Console.Write("Boat to select: ");
 
-            return Convert.ToInt32(Console.ReadLine());
+            return Console.ReadLine();
         }
     }
 }

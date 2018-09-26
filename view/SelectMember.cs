@@ -20,12 +20,12 @@ namespace MemberRegistry.view
             }
         }
 
-        public int GetSelectedMemberListIndex()
+        public string GetSelectedMemberListIndex()
         {
             Console.WriteLine();
             Console.Write("Member to select: ");
 
-            return Convert.ToInt32(Console.ReadLine());
+            return Console.ReadLine();
         }
     }
 }
