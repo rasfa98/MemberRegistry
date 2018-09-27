@@ -18,14 +18,14 @@ namespace MemberRegistry.view
             {
                 Console.WriteLine(i + ") " + boatsToList[i].Type + "    " + boatsToList[i].Length + "    " + boatsToList[i].Id);
             }
+
+            Console.WriteLine();
+            Console.Write("Boat to select: ");
         }
 
         public string GetlSelectedBoatListIndex()
         {
-            Console.WriteLine();
-            Console.Write("Boat to select: ");
-
-            return Console.ReadLine();
+            return Console.ReadLine(); ;
         }
     }
 }

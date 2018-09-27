@@ -18,13 +18,13 @@ namespace MemberRegistry.view
             {
                 Console.WriteLine(i + ") " + membersToList[i].Name + "    " + membersToList[i].PersonalNumber + "    " + membersToList[i].Id);
             }
+
+            Console.WriteLine();
+            Console.Write("Member to select: ");
         }
 
         public string GetSelectedMemberListIndex()
         {
-            Console.WriteLine();
-            Console.Write("Member to select: ");
-
             return Console.ReadLine();
         }
     }

@@ -24,7 +24,7 @@ namespace MemberRegistry.view
             Console.WriteLine("Q) Quit");
         }
 
-        public ConsoleKey GetUserSelection()
+        public ConsoleKey GetUserInput()
         {
             return Console.ReadKey().Key;
         }

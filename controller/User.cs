@@ -30,53 +30,42 @@ namespace MemberRegistry.controller
             editBoat = new view.EditBoat();
         }
 
-        public void Initialize()
+        public void StartApplication()
         {
             while (true)
             {
-                try
-                {
-                    menu.Display();
-                    HandleMenuSelection();
-                }
-                catch (Exception)
-                {
-                    continue;
-                }
-            }
-        }
+                menu.Display();
 
-        private void HandleMenuSelection()
-        {
-            switch (menu.GetUserSelection())
-            {
-                case ConsoleKey.D1:
-                    HandleCreateMember();
-                    break;
-                case ConsoleKey.D2:
-                    HandleViewMember();
-                    break;
-                case ConsoleKey.D3:
-                    HandleEditMember();
-                    break;
-                case ConsoleKey.D4:
-                    HandleDeleteMember();
-                    break;
-                case ConsoleKey.D5:
-                    HandleListMembers();
-                    break;
-                case ConsoleKey.D6:
-                    HandleRegisterBoat();
-                    break;
-                case ConsoleKey.D7:
-                    HandleEditBoat();
-                    break;
-                case ConsoleKey.D8:
-                    HandleDeleteBoat();
-                    break;
-                case ConsoleKey.Q:
-                    HandleQuitApplication();
-                    break;
+                switch (menu.GetUserInput())
+                {
+                    case ConsoleKey.D1:
+                        HandleCreateMember();
+                        break;
+                    case ConsoleKey.D2:
+                        HandleViewMember();
+                        break;
+                    case ConsoleKey.D3:
+                        HandleEditMember();
+                        break;
+                    case ConsoleKey.D4:
+                        HandleDeleteMember();
+                        break;
+                    case ConsoleKey.D5:
+                        HandleListMembers();
+                        break;
+                    case ConsoleKey.D6:
+                        HandleRegisterBoat();
+                        break;
+                    case ConsoleKey.D7:
+                        HandleEditBoat();
+                        break;
+                    case ConsoleKey.D8:
+                        HandleDeleteBoat();
+                        break;
+                    case ConsoleKey.Q:
+                        HandleQuitApplication();
+                        break;
+                }
             }
         }
 
