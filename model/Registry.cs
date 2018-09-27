@@ -11,11 +11,11 @@ namespace MemberRegistry.model
         public Guid SelectedMemberId { get; set; }
         public Guid SelectedBoatId { get; set; }
 
-        public void AddMember(Guid id, string name, string personalNumber)
+        public void AddMember(string name, string personalNumber)
         {
             List<Member> existingMembers = ReadFile();
 
-            existingMembers.Add(new Member(id, name, personalNumber));
+            existingMembers.Add(new Member(Guid.NewGuid(), name, personalNumber));
 
             WriteFile(existingMembers);
         }
@@ -48,13 +48,13 @@ namespace MemberRegistry.model
             WriteFile(modifiedList);
         }
 
-        public void AddBoat(Guid id, string type, double length)
+        public void AddBoat(string type, double length)
         {
             List<Member> existingMembers = ReadFile();
 
             Member memberToAddBoat = existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
 
-            memberToAddBoat.Boats.Add(new Boat(id, type, length));
+            memberToAddBoat.Boats.Add(new Boat(Guid.NewGuid(), type, length));
 
             WriteFile(existingMembers);
         }

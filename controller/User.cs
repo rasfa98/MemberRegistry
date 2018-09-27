@@ -76,7 +76,7 @@ namespace MemberRegistry.controller
             string name = createMember.GetName();
             string personalNumber = createMember.GetPersonalNumber();
 
-            registry.AddMember(Guid.NewGuid(), name, personalNumber);
+            registry.AddMember(name, personalNumber);
         }
 
         private void HandleEditMember()
@@ -98,7 +98,7 @@ namespace MemberRegistry.controller
             string type = registerBoat.GetBoatType();
             double length = registerBoat.GetBoatLength();
 
-            registry.AddBoat(Guid.NewGuid(), type, length);
+            registry.AddBoat(type, length);
         }
 
         private void HandleListMembers()
