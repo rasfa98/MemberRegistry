@@ -2,7 +2,7 @@ using System;
 
 namespace MemberRegistry.view
 {
-    class EditMember
+    class EnterMemberDetails
     {
         private string name;
         private string personalNumber;
@@ -11,13 +11,13 @@ namespace MemberRegistry.view
         {
             Console.Clear();
 
-            Console.WriteLine("Edit member");
+            Console.WriteLine("Enter member details");
             Console.WriteLine();
 
-            Console.Write("New name: ");
+            Console.Write("Name: ");
             name = Console.ReadLine();
 
-            Console.Write("New personal number: ");
+            Console.Write("Personal number: ");
             personalNumber = Console.ReadLine();
         }
 

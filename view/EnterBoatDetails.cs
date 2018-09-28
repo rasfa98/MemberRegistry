@@ -2,7 +2,7 @@ using System;
 
 namespace MemberRegistry.view
 {
-    class RegisterBoat
+    class EnterBoatDetails
     {
         private string type;
         private double length;
@@ -11,7 +11,7 @@ namespace MemberRegistry.view
         {
             Console.Clear();
 
-            Console.WriteLine("Register boat");
+            Console.WriteLine("Enter boat details");
             Console.WriteLine();
 
             Console.Write("Type: ");
@@ -21,7 +21,7 @@ namespace MemberRegistry.view
             length = double.Parse(Console.ReadLine());
         }
 
-         public string GetBoatType()
+        public string GetBoatType()
         {
             return type;
         }

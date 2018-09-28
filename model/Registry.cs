@@ -15,26 +15,21 @@ namespace MemberRegistry.model
         {
             List<Member> existingMembers = ReadFile();
 
-            existingMembers.Add(new Member(Guid.NewGuid(), name, personalNumber));
+            Member newMember = new Member(Guid.NewGuid(), name, personalNumber);
+
+            existingMembers.Add(newMember);
 
             WriteFile(existingMembers);
         }
 
-        public Member GetMember()
-        {
-            List<Member> existingMembers = ReadFile();
-
-            return existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
-        }
-
-        public void EditMember(string newName, string NewPersonalNumber)
+        public void EditMember(string newName, string newPersonalNumber)
         {
             List<Member> existingMembers = ReadFile();
 
             Member memberToEdit = existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
 
             memberToEdit.Name = newName;
-            memberToEdit.PersonalNumber = NewPersonalNumber;
+            memberToEdit.PersonalNumber = newPersonalNumber;
 
             WriteFile(existingMembers);
         }
@@ -48,13 +43,27 @@ namespace MemberRegistry.model
             WriteFile(modifiedList);
         }
 
+        public Member GetMember()
+        {
+            List<Member> existingMembers = ReadFile();
+
+            return existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
+        }
+
+        public List<Member> GetAllMembers()
+        {
+            return ReadFile();
+        }
+
         public void AddBoat(string type, double length)
         {
             List<Member> existingMembers = ReadFile();
 
             Member memberToAddBoat = existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
 
-            memberToAddBoat.Boats.Add(new Boat(Guid.NewGuid(), type, length));
+            Boat newBoat = new Boat(Guid.NewGuid(), type, length);
+
+            memberToAddBoat.Boats.Add(newBoat);
 
             WriteFile(existingMembers);
         }
@@ -82,11 +91,6 @@ namespace MemberRegistry.model
             WriteFile(existingMembers);
         }
 
-        public List<Member> GetAllMembers()
-        {
-            return ReadFile();
-        }
-
         private List<Member> ReadFile()
         {
             string jsonFile = File.ReadAllText("data.json");
@@ -96,8 +100,9 @@ namespace MemberRegistry.model
 
         private void WriteFile(List<Member> data)
         {
-            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-            File.WriteAllText("data.json", json);
+            string jsonFile = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+            File.WriteAllText("data.json", jsonFile);
         }
     }
 }
