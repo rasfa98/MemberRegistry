@@ -98,9 +98,9 @@ namespace MemberRegistry.model
             return JsonConvert.DeserializeObject<List<Member>>(jsonFile);
         }
 
-        private void WriteFile(List<Member> data)
+        private void WriteFile(List<Member> existingMembers)
         {
-            string jsonFile = JsonConvert.SerializeObject(data, Formatting.Indented);
+            string jsonFile = JsonConvert.SerializeObject(existingMembers, Formatting.Indented);
 
             File.WriteAllText("data.json", jsonFile);
         }
