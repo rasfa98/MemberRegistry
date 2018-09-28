@@ -8,7 +8,7 @@ namespace MemberRegistry.view
         {
             Console.Clear();
 
-            Console.WriteLine("Welcome to MemberRegistry!");
+            Console.WriteLine("Welcome to The jolly pirate member registry!");
             Console.WriteLine();
             Console.WriteLine("What would you like to do? (press the matching key on your keyboard)");
             Console.WriteLine();
