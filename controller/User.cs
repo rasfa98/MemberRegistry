@@ -9,10 +9,9 @@ namespace MemberRegistry.controller
         private view.Menu menu;
         private view.EnterMemberDetails enterMemberDetails;
         private view.ViewMember viewMember;
-        private view.SelectMember selectMember;
+        private view.SelectMenu selectMenu;
         private view.ListMembers listMembers;
         private view.EnterBoatDetails enterBoatDetails;
-        private view.SelectBoat selectBoat;
 
         public User()
         {
@@ -20,10 +19,9 @@ namespace MemberRegistry.controller
             menu = new view.Menu();
             enterMemberDetails = new view.EnterMemberDetails();
             viewMember = new view.ViewMember();
-            selectMember = new view.SelectMember();
             listMembers = new view.ListMembers();
             enterBoatDetails = new view.EnterBoatDetails();
-            selectBoat = new view.SelectBoat();
+            selectMenu = new view.SelectMenu();
         }
 
         public void StartApplication()
@@ -163,9 +161,9 @@ namespace MemberRegistry.controller
         {
             List<model.Boat> boatsToList = registry.GetMember().Boats;
 
-            selectBoat.Display(boatsToList);
+            selectMenu.Display(boatsToList);
 
-            int selectedBoatIndex = Convert.ToInt32(selectBoat.GetlSelectedBoatListIndex());
+            int selectedBoatIndex = Convert.ToInt32(selectMenu.GetSelectedItemListIndex());
 
             registry.SelectedBoatId = boatsToList[selectedBoatIndex].Id;
         }
@@ -174,9 +172,9 @@ namespace MemberRegistry.controller
         {
             List<model.Member> membersToList = registry.GetAllMembers();
 
-            selectMember.Display(membersToList);
+            selectMenu.Display(membersToList);
 
-            int selectedMemberListIndex = Convert.ToInt32(selectMember.GetSelectedMemberListIndex());
+            int selectedMemberListIndex = Convert.ToInt32(selectMenu.GetSelectedItemListIndex());
 
             registry.SelectedMemberId = membersToList[selectedMemberListIndex].Id;
         }
