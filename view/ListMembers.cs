@@ -16,9 +16,6 @@ namespace MemberRegistry.view
         {
             Console.Clear();
 
-            Console.WriteLine("List members");
-            Console.WriteLine();
-
             foreach (model.Member member in membersToList)
             {
                 if (_compactList)

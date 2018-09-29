@@ -8,9 +8,6 @@ namespace MemberRegistry.view
         {
             Console.Clear();
 
-            Console.WriteLine("View member");
-            Console.WriteLine();
-
             Console.WriteLine(memberToView.Name + "    " + memberToView.PersonalNumber + "    " + memberToView.Id);
 
             if (memberToView.Boats.Count > 0)

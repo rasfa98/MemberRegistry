@@ -11,9 +11,6 @@ namespace MemberRegistry.view
         {
             Console.Clear();
 
-            Console.WriteLine("Enter boat details");
-            Console.WriteLine();
-
             Console.Write("Type: ");
             _type = Console.ReadLine();
 

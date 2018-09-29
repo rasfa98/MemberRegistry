@@ -11,9 +11,6 @@ namespace MemberRegistry.view
         {
             Console.Clear();
 
-            Console.WriteLine("Enter member details");
-            Console.WriteLine();
-
             Console.Write("Name: ");
             _name = Console.ReadLine();
 
