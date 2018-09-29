@@ -51,6 +51,7 @@ namespace MemberRegistry.model
                 _personalNumber = value;
             }
         }
+
         public List<Boat> Boats { get; set; }
     }
 }
