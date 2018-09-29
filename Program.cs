@@ -8,13 +8,16 @@ namespace MemberRegistry
         {
             controller.User user = new controller.User();
 
-            try
+            while (true)
             {
-                user.StartApplication();
-            }
-            catch (Exception)
-            {
-                user.StartApplication();
+                try
+                {
+                    user.StartApplication();
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
             }
         }
     }
