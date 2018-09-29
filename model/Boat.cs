@@ -7,14 +7,11 @@ namespace MemberRegistry.model
         private string _type;
         private double _length;
 
-        public Boat(Guid id, string type, double length)
+        public Boat(string type, double length)
         {
-            Id = id;
             Type = type;
             Length = length;
         }
-
-        public Guid Id { get; set; }
 
         public string Type
         {

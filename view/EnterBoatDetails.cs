@@ -4,8 +4,8 @@ namespace MemberRegistry.view
 {
     class EnterBoatDetails
     {
-        private string type;
-        private double length;
+        private string _type;
+        private double _length;
 
         public void Display()
         {
@@ -15,20 +15,20 @@ namespace MemberRegistry.view
             Console.WriteLine();
 
             Console.Write("Type: ");
-            type = Console.ReadLine();
+            _type = Console.ReadLine();
 
             Console.Write("Length: ");
-            length = double.Parse(Console.ReadLine());
+            _length = double.Parse(Console.ReadLine());
         }
 
         public string GetBoatType()
         {
-            return type;
+            return _type;
         }
 
         public double GetBoatLength()
         {
-            return length;
+            return _length;
         }
     }
 }

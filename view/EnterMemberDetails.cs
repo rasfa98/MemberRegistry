@@ -4,8 +4,8 @@ namespace MemberRegistry.view
 {
     class EnterMemberDetails
     {
-        private string name;
-        private string personalNumber;
+        private string _name;
+        private string _personalNumber;
 
         public void Display()
         {
@@ -15,20 +15,20 @@ namespace MemberRegistry.view
             Console.WriteLine();
 
             Console.Write("Name: ");
-            name = Console.ReadLine();
+            _name = Console.ReadLine();
 
             Console.Write("Personal number: ");
-            personalNumber = Console.ReadLine();
+            _personalNumber = Console.ReadLine();
         }
 
         public string GetName()
         {
-            return name;
+            return _name;
         }
 
         public string GetPersonalNumber()
         {
-            return personalNumber;
+            return _personalNumber;
         }
     }
 }

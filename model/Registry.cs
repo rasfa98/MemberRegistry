@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace MemberRegistry.model
 {
     class Registry
     {
-        public Guid SelectedMemberId { get; set; }
-        public Guid SelectedBoatId { get; set; }
+        public int SelectedMemberIndex { get; set; }
+        public int SelectedBoatIndex { get; set; }
 
         public void AddMember(string name, string personalNumber)
         {
@@ -26,7 +25,7 @@ namespace MemberRegistry.model
         {
             List<Member> existingMembers = ReadFile();
 
-            Member memberToEdit = existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
+            Member memberToEdit = existingMembers[SelectedMemberIndex];
 
             memberToEdit.Name = newName;
             memberToEdit.PersonalNumber = newPersonalNumber;
@@ -38,16 +37,16 @@ namespace MemberRegistry.model
         {
             List<Member> existingMembers = ReadFile();
 
-            List<Member> modifiedList = existingMembers.Where(member => member.Id != SelectedMemberId).ToList();
+            existingMembers.RemoveAt(SelectedMemberIndex);
 
-            WriteFile(modifiedList);
+            WriteFile(existingMembers);
         }
 
         public Member GetMember()
         {
             List<Member> existingMembers = ReadFile();
 
-            return existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
+            return existingMembers[SelectedMemberIndex];
         }
 
         public List<Member> GetAllMembers()
@@ -59,9 +58,9 @@ namespace MemberRegistry.model
         {
             List<Member> existingMembers = ReadFile();
 
-            Member memberToAddBoat = existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
+            Member memberToAddBoat = existingMembers[SelectedMemberIndex];
 
-            Boat newBoat = new Boat(Guid.NewGuid(), type, length);
+            Boat newBoat = new Boat(type, length);
 
             memberToAddBoat.Boats.Add(newBoat);
 
@@ -72,8 +71,8 @@ namespace MemberRegistry.model
         {
             List<Member> existingMembers = ReadFile();
 
-            Member memberToEdit = existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
-            Boat boatToEdit = memberToEdit.Boats.Where(boat => boat.Id == SelectedBoatId).ToList()[0];
+            Member memberToEdit = existingMembers[SelectedMemberIndex];
+            Boat boatToEdit = memberToEdit.Boats[SelectedBoatIndex];
 
             boatToEdit.Type = newType;
             boatToEdit.Length = newLength;
@@ -85,8 +84,9 @@ namespace MemberRegistry.model
         {
             List<Member> existingMembers = ReadFile();
 
-            Member memberToEdit = existingMembers.Where(member => member.Id == SelectedMemberId).ToList()[0];
-            memberToEdit.Boats = memberToEdit.Boats.Where(boat => boat.Id != SelectedBoatId).ToList();
+            Member memberToEdit = existingMembers[SelectedMemberIndex];
+
+            memberToEdit.Boats.RemoveAt(SelectedBoatIndex);
 
             WriteFile(existingMembers);
         }

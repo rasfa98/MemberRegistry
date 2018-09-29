@@ -16,7 +16,7 @@ namespace MemberRegistry.view
 
             for (int i = 0; i < membersToList.Count; i++)
             {
-                Console.WriteLine(i + ") " + membersToList[i].Name + "    " + membersToList[i].PersonalNumber + "    " + membersToList[i].Id);
+                Console.WriteLine(i + ") " + membersToList[i].Name + "    " + membersToList[i].PersonalNumber);
             }
 
             Console.WriteLine();
@@ -34,7 +34,7 @@ namespace MemberRegistry.view
 
             for (int i = 0; i < boatsToList.Count; i++)
             {
-                Console.WriteLine(i + ") " + boatsToList[i].Type + "    " + boatsToList[i].Length + "    " + boatsToList[i].Id);
+                Console.WriteLine(i + ") " + boatsToList[i].Type + "    " + boatsToList[i].Length);
             }
 
             Console.WriteLine();

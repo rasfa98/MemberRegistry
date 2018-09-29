@@ -5,32 +5,32 @@ namespace MemberRegistry.controller
 {
     class User
     {
-        private model.Registry registry;
-        private view.Menu menu;
-        private view.EnterMemberDetails enterMemberDetails;
-        private view.ViewMember viewMember;
-        private view.SelectMenu selectMenu;
-        private view.ListMembers listMembers;
-        private view.EnterBoatDetails enterBoatDetails;
+        private model.Registry _registry;
+        private view.Menu _menu;
+        private view.EnterMemberDetails _enterMemberDetails;
+        private view.ViewMember _viewMember;
+        private view.SelectMenu _selectMenu;
+        private view.ListMembers _listMembers;
+        private view.EnterBoatDetails _enterBoatDetails;
 
         public User()
         {
-            registry = new model.Registry();
-            menu = new view.Menu();
-            enterMemberDetails = new view.EnterMemberDetails();
-            viewMember = new view.ViewMember();
-            listMembers = new view.ListMembers();
-            enterBoatDetails = new view.EnterBoatDetails();
-            selectMenu = new view.SelectMenu();
+            _registry = new model.Registry();
+            _menu = new view.Menu();
+            _enterMemberDetails = new view.EnterMemberDetails();
+            _viewMember = new view.ViewMember();
+            _listMembers = new view.ListMembers();
+            _enterBoatDetails = new view.EnterBoatDetails();
+            _selectMenu = new view.SelectMenu();
         }
 
         public void StartApplication()
         {
             while (true)
             {
-                menu.Display();
+                _menu.Display();
 
-                switch (menu.GetUserInput())
+                switch (_menu.GetUserInput())
                 {
                     case ConsoleKey.D1:
                         HandleCreateMember();
@@ -65,23 +65,23 @@ namespace MemberRegistry.controller
 
         private void HandleCreateMember()
         {
-            enterMemberDetails.Display();
+            _enterMemberDetails.Display();
 
-            string name = enterMemberDetails.GetName();
-            string personalNumber = enterMemberDetails.GetPersonalNumber();
+            string name = _enterMemberDetails.GetName();
+            string personalNumber = _enterMemberDetails.GetPersonalNumber();
 
-            registry.AddMember(name, personalNumber);
+            _registry.AddMember(name, personalNumber);
         }
 
         private void HandleEditMember()
         {
             SelectMember();
-            enterMemberDetails.Display();
+            _enterMemberDetails.Display();
 
-            string newName = enterMemberDetails.GetName();
-            string newPersonalNumber = enterMemberDetails.GetPersonalNumber();
+            string newName = _enterMemberDetails.GetName();
+            string newPersonalNumber = _enterMemberDetails.GetPersonalNumber();
 
-            registry.EditMember(newName, newPersonalNumber);
+            _registry.EditMember(newName, newPersonalNumber);
         }
 
         private void HandleListMembers()
@@ -90,16 +90,16 @@ namespace MemberRegistry.controller
 
             while (pressedKey != ConsoleKey.B)
             {
-                List<model.Member> membersToList = registry.GetAllMembers();
+                List<model.Member> membersToList = _registry.GetAllMembers();
 
-                listMembers.Display(membersToList);
+                _listMembers.Display(membersToList);
 
-                pressedKey = listMembers.GetUserInput();
+                pressedKey = _listMembers.GetUserInput();
 
                 switch (pressedKey)
                 {
                     case ConsoleKey.T:
-                        listMembers.ToggleListType();
+                        _listMembers.ToggleListType();
                         break;
                 }
             }
@@ -108,7 +108,7 @@ namespace MemberRegistry.controller
         private void HandleDeleteMember()
         {
             SelectMember();
-            registry.DeleteMember();
+            _registry.DeleteMember();
         }
 
         private void HandleViewMember()
@@ -119,64 +119,60 @@ namespace MemberRegistry.controller
 
             while (pressedKey != ConsoleKey.B)
             {
-                model.Member memberToView = registry.GetMember();
+                model.Member memberToView = _registry.GetMember();
 
-                viewMember.Display(memberToView);
+                _viewMember.Display(memberToView);
 
-                pressedKey = viewMember.GetUserInput();
+                pressedKey = _viewMember.GetUserInput();
             }
         }
 
         private void HandleRegisterBoat()
         {
             SelectMember();
-            enterBoatDetails.Display();
+            _enterBoatDetails.Display();
 
-            string type = enterBoatDetails.GetBoatType();
-            double length = enterBoatDetails.GetBoatLength();
+            string type = _enterBoatDetails.GetBoatType();
+            double length = _enterBoatDetails.GetBoatLength();
 
-            registry.AddBoat(type, length);
+            _registry.AddBoat(type, length);
         }
 
         private void HandleEditBoat()
         {
             SelectMember();
             SelectBoat();
-            enterBoatDetails.Display();
+            _enterBoatDetails.Display();
 
-            string newType = enterBoatDetails.GetBoatType();
-            double newLength = enterBoatDetails.GetBoatLength();
+            string newType = _enterBoatDetails.GetBoatType();
+            double newLength = _enterBoatDetails.GetBoatLength();
 
-            registry.EditBoat(newType, newLength);
+            _registry.EditBoat(newType, newLength);
         }
 
         private void HandleDeleteBoat()
         {
             SelectMember();
             SelectBoat();
-            registry.DeleteBoat();
+            _registry.DeleteBoat();
         }
 
         private void SelectBoat()
         {
-            List<model.Boat> boatsToList = registry.GetMember().Boats;
+            List<model.Boat> boatsToList = _registry.GetMember().Boats;
 
-            selectMenu.Display(boatsToList);
+            _selectMenu.Display(boatsToList);
 
-            int selectedBoatIndex = Convert.ToInt32(selectMenu.GetSelectedItemListIndex());
-
-            registry.SelectedBoatId = boatsToList[selectedBoatIndex].Id;
+            _registry.SelectedBoatIndex = Convert.ToInt32(_selectMenu.GetSelectedItemListIndex());
         }
 
         private void SelectMember()
         {
-            List<model.Member> membersToList = registry.GetAllMembers();
+            List<model.Member> membersToList = _registry.GetAllMembers();
 
-            selectMenu.Display(membersToList);
+            _selectMenu.Display(membersToList);
 
-            int selectedMemberListIndex = Convert.ToInt32(selectMenu.GetSelectedItemListIndex());
-
-            registry.SelectedMemberId = membersToList[selectedMemberListIndex].Id;
+            _registry.SelectedMemberIndex = Convert.ToInt32(_selectMenu.GetSelectedItemListIndex());
         }
 
         private void HandleQuitApplication()

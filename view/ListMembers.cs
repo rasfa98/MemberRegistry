@@ -5,11 +5,11 @@ namespace MemberRegistry.view
 {
     class ListMembers
     {
-        private bool compactList;
+        private bool _compactList;
 
         public ListMembers()
         {
-            compactList = true;
+            _compactList = true;
         }
 
         public void Display(List<model.Member> membersToList)
@@ -21,7 +21,7 @@ namespace MemberRegistry.view
 
             foreach (model.Member member in membersToList)
             {
-                if (compactList)
+                if (_compactList)
                 {
                     Console.WriteLine(member.Name + "    " + member.Id + "    " + member.Boats.Count);
                     Console.WriteLine();
@@ -47,7 +47,7 @@ namespace MemberRegistry.view
 
         public void ToggleListType()
         {
-            compactList = !compactList;
+            _compactList = !_compactList;
         }
 
         public ConsoleKey GetUserInput()
