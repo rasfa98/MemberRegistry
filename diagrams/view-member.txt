@@ -1,41 +1,25 @@
 title View member
 
-Program->controller.User: Initialize()
+C.User->C.User: SelectMember()
+C.User->M.Registry: GetAllMembers()
+M.Registry->M.Registry: ReadFile()
+M.Registry->IO.File: jsonFile = ReadAllText("data.json")
+M.Registry->Newtonsoft.Json.JsonConvert: membersToList = DeserializeObject(jsonFile)
+M.Registry-->C.User: membersToList
+C.User->V.SelectMenu: Display(membersToList)
+C.User->V.SelectMenu: selectedItemListIndex = GetSelectedItemListIndex()
+C.User->M.Registry: SelectedMemberIndex = selectedItemListIndex
+C.User->M.Registry: GetMember()
+M.Registry->M.Registry: ReadFile()
+M.Registry->IO.File: jsonFile = ReadAllText("data.json")
+M.Registry->Newtonsoft.Json.JsonConvert: existingMembers = DeserializeObject(jsonFile)
+M.Registry-->C.User: memberToView
+C.User->V.ViewMember: Display(memberToView)
+V.ViewMember->M.Member: Name
+V.ViewMember->M.Member: PersonalNumber
+V.ViewMember->M.Member: Id
 
-loop while true
-    controller.User->view.Menu: Display()
-    controller.User->controller.User: HandleMenuSelection()
-    controller.User->view.Menu: GetUserSelection()
-    view.Menu-->controller.User: userSelection 
-    
-    alt userSelection == ConsoleKey.D2
-    controller.User->controller.User: HandleViewMember()
-    controller.User->controller.User: HandleSelectMember()
-    controller.User->model.Registry: GetAllMembers()
-    model.Registry->model.Registry: ReadFile()
-    model.Registry->io.File: ReadAllText("data.json")
-    io.File-->model.Registry: jsonFile
-    model.Registry->Newtonsoft.JsonConvert: DeserializeObject(jsonFile)
-    Newtonsoft.JsonConvert-->model.Registry: existingMembers
-    model.Registry-->controller.User: existingMembers
-    controller.User->view.SelectMember: Display(existingMembers)
-    controller.User->view.SelectMember: GetSelectedMemberListIndex()
-    view.SelectMember-->controller.User: selectedMemberListIndex
-    controller.User->model.Registry: SelectedMemberId = selectedMemberListIndex
-    
-    loop while pressedKey != ConsoleKey.B
-        controller.User->model.Registry: GetMember()
-        model.Registry->model.Registry: ReadFile()
-        model.Registry->io.File: ReadAllText("data.json")
-        io.File-->model.Registry: jsonFile
-        model.Registry->Newtonsoft.JsonConvert: DeserializeObject(jsonFile)
-        Newtonsoft.JsonConvert-->model.Registry: existingMembers
-        model.Registry->Linq: existingMembers.Where(member.Id == SelectedMemberId)
-        Linq-->model.Registry: memberToView
-        model.Registry-->controller.User: memberToView
-        controller.User->view.ViewMember: Display(memberToView)
-        controller.User->view.ViewMember: GetUserInput()
-        view.ViewMember-->controller.User: pressedKey
-    end
-    end 
+loop foreach boat
+V.ViewMember->M.Member: boat.Type
+V.ViewMember->M.Member: boat.Length
 end

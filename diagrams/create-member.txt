@@ -1,28 +1,14 @@
 title Create member
 
-Program->controller.User: Initialize()
-
-loop while true
-    controller.User->view.Menu: Display()
-    controller.User->controller.User: HandleMenuSelection()
-    controller.User->view.Menu: GetUserSelection()
-    view.Menu-->controller.User: userSelection 
-    
-    alt userSelection == ConsoleKey.D1
-    controller.User->controller.User: HandleCreateMember()
-    controller.User->view.CreateMember: Display()
-    controller.User->view.CreateMember: GetName()
-    view.CreateMember-->controller.User: name
-    controller.User->view.CreateMember: GetPersonalNumber()
-    view.CreateMember-->controller.User: personalNumber
-    controller.User->model.Registry: AddMember(Guid.newGuid(), name, personalNumber)
-    model.Registry->model.Registry: ReadFile()
-    model.Registry->io.File: ReadAllText("data.json")
-    io.File-->model.Registry: jsonFile
-    model.Registry->Newtonsoft.JsonConvert: DeserializeObject(jsonFile)
-    Newtonsoft.JsonConvert-->model.Registry: existingMembers
-    model.Registry->Collections.List: existingMembers.Add(id, name, personalNumber)
-    model.Registry->model.Registry: WriteFile(existingMembers)
-    model.Registry->Newtonsoft.JsonConvert: SerializeObject(existingMembers, Formatting.Indented)
-    end 
-end
+C.User->V.EnterMemberDetails: Display()
+C.User->V.EnterMemberDetails: name = GetName()
+C.User->V.EnterMemberDetails: personalNumber = GetPersonalNumber()
+C.User->M.Registry: AddMember(name, personalNumber)
+M.Registry->M.Registry: ReadFile()
+M.Registry->IO.File: jsonFile = ReadAllText("data.json")
+M.Registry->Newtonsoft.Json.JsonConvert: existingMembers = DeserializeObject(jsonFile)
+M.Registry->M.Member: newMember = create(Guid.newGuid(), name, personalNumber)
+M.Registry->Collections.Generic.List: existingMembers.Add(newMember)
+M.Registry->M.Registry: WriteFile(existingMembers)
+M.Registry->Newtonsoft.Json.JsonConvert: jsonFile = SerializeObject(existingMembers, Formatting.Indented)
+M.Registry->IO.File: WriteAllText("data.json", jsonFile)
