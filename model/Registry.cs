@@ -93,16 +93,20 @@ namespace MemberRegistry.model
 
         private List<Member> ReadFile()
         {
-            string jsonFile = File.ReadAllText("data.json");
+            string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/data.json";
+
+            string jsonFile = File.ReadAllText(path);
 
             return JsonConvert.DeserializeObject<List<Member>>(jsonFile);
         }
 
         private void WriteFile(List<Member> existingMembers)
         {
+            string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/data.json";
+
             string jsonFile = JsonConvert.SerializeObject(existingMembers, Formatting.Indented);
 
-            File.WriteAllText("data.json", jsonFile);
+            File.WriteAllText(path, jsonFile);
         }
     }
 }
