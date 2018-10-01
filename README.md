@@ -18,7 +18,7 @@ First of all make sure that you are in the *application* folder located in the r
 
 Example output
 
-`$ /Users/xxxx/Documents/MemberRegistry/application`
+`$ /Users/xxxx/Documents/workshop-2/application`
 
 Then start the application
 
