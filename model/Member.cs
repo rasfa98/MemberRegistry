@@ -5,6 +5,7 @@ namespace MemberRegistry.model
 {
     class Member
     {
+        private Guid _id;
         private string _name;
         private string _personalNumber;
 
@@ -16,7 +17,22 @@ namespace MemberRegistry.model
             Boats = new List<Boat>();
         }
 
-        public Guid Id { get; set; }
+        public Guid Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (value == Guid.Empty)
+                {
+                    throw new ArgumentException("Please give the member a valid ID.");
+                }
+
+                _id = value;
+            }
+        }
 
         public string Name
         {
@@ -26,7 +42,7 @@ namespace MemberRegistry.model
             }
             set
             {
-                if (value == "")
+                if (value.Trim() == "")
                 {
                     throw new ArgumentException("Please enter a name for the member.");
                 }
@@ -43,7 +59,7 @@ namespace MemberRegistry.model
             }
             set
             {
-                if (value == "")
+                if (value.Trim() == "")
                 {
                     throw new ArgumentException("Please enter a personal number for the member.");
                 }

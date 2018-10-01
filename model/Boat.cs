@@ -21,7 +21,7 @@ namespace MemberRegistry.model
             }
             set
             {
-                if (value == "")
+                if (value.Trim() == "")
                 {
                     throw new ArgumentException("Please enter a type for the boat.");
                 }
