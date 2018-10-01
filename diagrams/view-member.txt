@@ -7,19 +7,25 @@ M.Registry->IO.File: jsonFile = ReadAllText("data.json")
 M.Registry->Newtonsoft.Json.JsonConvert: membersToList = DeserializeObject(jsonFile)
 M.Registry-->C.User: membersToList
 C.User->V.SelectMenu: Display(membersToList)
+
+loop for every member 
+V.SelectMenu->M.Member: Name
+V.SelectMenu->M.Member: PersonalNumber
+end
+
 C.User->V.SelectMenu: selectedItemListIndex = GetSelectedItemListIndex()
 C.User->M.Registry: SelectedMemberIndex = selectedItemListIndex
 C.User->M.Registry: GetMember()
 M.Registry->M.Registry: ReadFile()
 M.Registry->IO.File: jsonFile = ReadAllText("data.json")
 M.Registry->Newtonsoft.Json.JsonConvert: existingMembers = DeserializeObject(jsonFile)
-M.Registry-->C.User: memberToView
+M.Registry-->C.User: existingMembers[SelectedMemberIndex]
 C.User->V.ViewMember: Display(memberToView)
 V.ViewMember->M.Member: Name
 V.ViewMember->M.Member: PersonalNumber
 V.ViewMember->M.Member: Id
 
 loop foreach boat
-V.ViewMember->M.Member: boat.Type
-V.ViewMember->M.Member: boat.Length
+V.ViewMember->M.Boat: Type
+V.ViewMember->M.Boat: Length
 end
