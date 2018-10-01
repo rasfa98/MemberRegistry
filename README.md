@@ -4,25 +4,11 @@ This is a simple member registry created for the second workshop in the course 1
 
 ## Prerequisites
 
-First of all you need to install **\.NET Core Runtime** in order to run the application. This is due to the large file-size when creating a self-contained application which can not be uploaded to CSQUIZ.
-
-[Link to .NET Core Runtime](https://www.microsoft.com/net/download)
+You need to download one of the .exe zip-files that matches your operating system. [Here is a link to the available versions](https://drive.google.com/drive/folders/12NIhRDNUtfFcx1tmsSPuYMdQtHc2Uace?usp=sharing)
 
 ## Start the application
 
-Open your terminal and run the following commands.
-
-First of all make sure that you are in the *application* folder located in the root directory of the project by typing the following command:
-
-`$ pwd`
-
-Example output
-
-`$ /Users/xxxx/Documents/workshop-2/application`
-
-Then start the application
-
-`$ dotnet MemberRegistry.dll`
+To start the application simply double-click on the file called *MemberRegistry.exe*. The application will then open in your default terminal.
 
 ## Storage
 
