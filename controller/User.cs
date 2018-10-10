@@ -132,7 +132,7 @@ namespace MemberRegistry.controller
             SelectMember();
             _enterBoatDetails.Display();
 
-            string type = _enterBoatDetails.GetBoatType();
+            model.BoatType type = _enterBoatDetails.GetBoatType();
             double length = _enterBoatDetails.GetBoatLength();
 
             _registry.AddBoat(type, length);
@@ -144,7 +144,7 @@ namespace MemberRegistry.controller
             SelectBoat();
             _enterBoatDetails.Display();
 
-            string newType = _enterBoatDetails.GetBoatType();
+            model.BoatType newType = _enterBoatDetails.GetBoatType();
             double newLength = _enterBoatDetails.GetBoatLength();
 
             _registry.EditBoat(newType, newLength);
@@ -163,7 +163,7 @@ namespace MemberRegistry.controller
 
             _selectMenu.Display(boatsToList);
 
-            _registry.SelectedBoatIndex = Convert.ToInt32(_selectMenu.GetSelectedItemListIndex());
+            _registry.SelectedBoatIndex = int.Parse(_selectMenu.GetSelectedItemListIndex());
         }
 
         private void SelectMember()
@@ -172,7 +172,7 @@ namespace MemberRegistry.controller
 
             _selectMenu.Display(membersToList);
 
-            _registry.SelectedMemberIndex = Convert.ToInt32(_selectMenu.GetSelectedItemListIndex());
+            _registry.SelectedMemberIndex = int.Parse(_selectMenu.GetSelectedItemListIndex());
         }
 
         private void HandleQuitApplication()

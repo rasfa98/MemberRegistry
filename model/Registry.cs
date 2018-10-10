@@ -54,7 +54,7 @@ namespace MemberRegistry.model
             return ReadFile();
         }
 
-        public void AddBoat(string type, double length)
+        public void AddBoat(BoatType type, double length)
         {
             List<Member> existingMembers = ReadFile();
 
@@ -67,7 +67,7 @@ namespace MemberRegistry.model
             WriteFile(existingMembers);
         }
 
-        public void EditBoat(string newType, double newLength)
+        public void EditBoat(BoatType newType, double newLength)
         {
             List<Member> existingMembers = ReadFile();
 

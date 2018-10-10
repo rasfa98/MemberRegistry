@@ -4,31 +4,16 @@ namespace MemberRegistry.model
 {
     class Boat
     {
-        private string _type;
+        private BoatType _type;
         private double _length;
 
-        public Boat(string type, double length)
+        public Boat(BoatType type, double length)
         {
             Type = type;
             Length = length;
         }
 
-        public string Type
-        {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                if (value.Trim() == "")
-                {
-                    throw new ArgumentException("Please enter a type for the boat.");
-                }
-
-                _type = value;
-            }
-        }
+        public BoatType Type { get; set; }
 
         public double Length
         {
