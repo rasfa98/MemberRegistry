@@ -11,10 +11,6 @@ namespace MemberRegistry.view
         {
             Console.Clear();
 
-            Console.Write("Length: ");
-            _length = double.Parse(Console.ReadLine());
-
-            Console.WriteLine();
             Console.WriteLine("write the number of the boat type you would like to select");
             Console.WriteLine();
 
@@ -25,8 +21,11 @@ namespace MemberRegistry.view
 
             Console.WriteLine();
             Console.Write("Boat type to select: ");
-
             _type = (model.BoatType)int.Parse(Console.ReadLine());
+
+            Console.WriteLine();
+            Console.Write("Length: ");
+            _length = double.Parse(Console.ReadLine());
         }
 
         public model.BoatType GetBoatType()
