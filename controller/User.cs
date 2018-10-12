@@ -90,9 +90,7 @@ namespace MemberRegistry.controller
 
             while (pressedKey != ConsoleKey.B)
             {
-                List<model.Member> membersToList = _registry.GetAllMembers();
-
-                _listMembers.Display(membersToList);
+                _listMembers.Display(_registry.GetAllMembers());
 
                 pressedKey = _listMembers.GetUserInput();
 
@@ -119,9 +117,7 @@ namespace MemberRegistry.controller
 
             while (pressedKey != ConsoleKey.B)
             {
-                model.Member memberToView = _registry.GetMember();
-
-                _viewMember.Display(memberToView);
+                _viewMember.Display(_registry.GetMember());
 
                 pressedKey = _viewMember.GetUserInput();
             }
@@ -153,18 +149,14 @@ namespace MemberRegistry.controller
 
         private void SelectBoat()
         {
-            List<model.Boat> boatsToList = _registry.GetMember().Boats;
-
-            _selectMenu.Display(boatsToList);
+            _selectMenu.Display(_registry.GetMember().Boats);
 
             _registry.SelectedBoatIndex = int.Parse(_selectMenu.GetSelectedItemListIndex());
         }
 
         private void SelectMember()
         {
-            List<model.Member> membersToList = _registry.GetAllMembers();
-
-            _selectMenu.Display(membersToList);
+            _selectMenu.Display(_registry.GetAllMembers());
 
             _registry.SelectedMemberIndex = int.Parse(_selectMenu.GetSelectedItemListIndex());
         }
