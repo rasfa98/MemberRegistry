@@ -4,7 +4,6 @@ namespace MemberRegistry.model
 {
     class Boat
     {
-        private BoatType _type;
         private double _length;
 
         public Boat(BoatType type, double length)

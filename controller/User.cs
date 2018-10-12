@@ -132,10 +132,7 @@ namespace MemberRegistry.controller
             SelectMember();
             _enterBoatDetails.Display();
 
-            model.BoatType type = _enterBoatDetails.GetBoatType();
-            double length = _enterBoatDetails.GetBoatLength();
-
-            _registry.AddBoat(type, length);
+            _registry.AddBoat(_enterBoatDetails.GetBoatType(), _enterBoatDetails.GetBoatLength());
         }
 
         private void HandleEditBoat()
@@ -144,10 +141,7 @@ namespace MemberRegistry.controller
             SelectBoat();
             _enterBoatDetails.Display();
 
-            model.BoatType newType = _enterBoatDetails.GetBoatType();
-            double newLength = _enterBoatDetails.GetBoatLength();
-
-            _registry.EditBoat(newType, newLength);
+            _registry.EditBoat(_enterBoatDetails.GetBoatType(), _enterBoatDetails.GetBoatLength());
         }
 
         private void HandleDeleteBoat()
