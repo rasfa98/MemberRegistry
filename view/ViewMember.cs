@@ -22,9 +22,14 @@ namespace MemberRegistry.view
             Console.WriteLine("B) Go back");
         }
 
-        public ConsoleKey GetUserInput()
+        public Event GetEvent()
         {
-            return Console.ReadKey().Key;
+            if (Console.ReadKey().Key == ConsoleKey.B)
+            {
+                return Event.GoBack;
+            }
+
+            return Event.None;
         }
     }
 }

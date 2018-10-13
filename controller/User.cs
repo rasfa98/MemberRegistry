@@ -30,33 +30,33 @@ namespace MemberRegistry.controller
             {
                 _menu.Display();
 
-                switch (_menu.GetUserInput())
+                switch (_menu.GetEvent())
                 {
-                    case ConsoleKey.D1:
+                    case view.Event.CreateMember:
                         HandleCreateMember();
                         break;
-                    case ConsoleKey.D2:
+                    case view.Event.ViewMember:
                         HandleViewMember();
                         break;
-                    case ConsoleKey.D3:
+                    case view.Event.EditMember:
                         HandleEditMember();
                         break;
-                    case ConsoleKey.D4:
+                    case view.Event.DeleteMember:
                         HandleDeleteMember();
                         break;
-                    case ConsoleKey.D5:
+                    case view.Event.ListMembers:
                         HandleListMembers();
                         break;
-                    case ConsoleKey.D6:
+                    case view.Event.RegisterBoat:
                         HandleRegisterBoat();
                         break;
-                    case ConsoleKey.D7:
+                    case view.Event.EditBoat:
                         HandleEditBoat();
                         break;
-                    case ConsoleKey.D8:
+                    case view.Event.DeleteBoat:
                         HandleDeleteBoat();
                         break;
-                    case ConsoleKey.Q:
+                    case view.Event.Quit:
                         HandleQuitApplication();
                         break;
                 }
@@ -86,19 +86,17 @@ namespace MemberRegistry.controller
 
         private void HandleListMembers()
         {
-            ConsoleKey pressedKey = default(ConsoleKey);
+            view.Event e = view.Event.None;
 
-            while (pressedKey != ConsoleKey.B)
+            while (e != view.Event.GoBack)
             {
                 _listMembers.Display(_registry.GetAllMembers());
 
-                pressedKey = _listMembers.GetUserInput();
+                e = _listMembers.GetEvent();
 
-                switch (pressedKey)
+                if (e == view.Event.ToggleList)
                 {
-                    case ConsoleKey.T:
-                        _listMembers.ToggleListType();
-                        break;
+                    _listMembers.ToggleListType();
                 }
             }
         }
@@ -111,15 +109,15 @@ namespace MemberRegistry.controller
 
         private void HandleViewMember()
         {
-            ConsoleKey pressedKey = default(ConsoleKey);
+            view.Event e = view.Event.None;
 
             SelectMember();
 
-            while (pressedKey != ConsoleKey.B)
+            while (e != view.Event.GoBack)
             {
                 _viewMember.Display(_registry.GetMember());
 
-                pressedKey = _viewMember.GetUserInput();
+                e = _viewMember.GetEvent();
             }
         }
 

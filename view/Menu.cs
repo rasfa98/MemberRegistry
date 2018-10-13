@@ -24,9 +24,48 @@ namespace MemberRegistry.view
             Console.WriteLine("Q) Quit");
         }
 
-        public ConsoleKey GetUserInput()
+        public Event GetEvent()
         {
-            return Console.ReadKey().Key;
+            ConsoleKey input = Console.ReadKey().Key;
+
+            if (input == ConsoleKey.D1)
+            {
+                return Event.CreateMember;
+            }
+            else if (input == ConsoleKey.D2)
+            {
+                return Event.ViewMember;
+            }
+            else if (input == ConsoleKey.D3)
+            {
+                return Event.EditMember;
+            }
+            else if (input == ConsoleKey.D4)
+            {
+                return Event.DeleteMember;
+            }
+            else if (input == ConsoleKey.D5)
+            {
+                return Event.ListMembers;
+            }
+            else if (input == ConsoleKey.D6)
+            {
+                return Event.RegisterBoat;
+            }
+            else if (input == ConsoleKey.D7)
+            {
+                return Event.EditBoat;
+            }
+            else if (input == ConsoleKey.D8)
+            {
+                return Event.DeleteBoat;
+            }
+            else if (input == ConsoleKey.Q)
+            {
+                return Event.Quit;
+            }
+
+            return Event.None;
         }
     }
 }

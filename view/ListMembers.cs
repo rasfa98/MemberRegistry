@@ -47,9 +47,20 @@ namespace MemberRegistry.view
             _compactList = !_compactList;
         }
 
-        public ConsoleKey GetUserInput()
+        public Event GetEvent()
         {
-            return Console.ReadKey().Key;
+            ConsoleKey input = Console.ReadKey().Key;
+
+            if (input == ConsoleKey.T)
+            {
+                return Event.ToggleList;
+            }
+            else if (input == ConsoleKey.B)
+            {
+                return Event.GoBack;
+            }
+
+            return Event.None;
         }
     }
 }
