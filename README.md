@@ -6,7 +6,7 @@ This is a simple member registry created for the second workshop in the course 1
 
 You need to download one of the applications that will run on your operating system. [Here is a link to the available versions](https://drive.google.com/drive/folders/12NIhRDNUtfFcx1tmsSPuYMdQtHc2Uace?usp=sharing)
 
-If you don't find a version that you can run you can install Dotnet Core SDK and run the project instead. [Here is a link to Dotnet Core SDK](https://www.microsoft.com/net/download)
+If you don't find a version that you can run you can install .NET Core SDK and run the project instead. [Here is a link to the framework](https://www.microsoft.com/net/download)
 
 ## Start the application
 
@@ -16,7 +16,7 @@ To start the application simply double-click on the file called *MemberRegistry.
 
 If you want to run the project instead of the executable file do the following:
 
-1. Install Dotnet Core SDK
+1. Install .NET Core SDK
 
 2. Navigate to the folder called *source-code*
 `$ cd /xxx/xxx/xxx/source-code`
