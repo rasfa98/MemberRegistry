@@ -4,9 +4,9 @@ This is a simple member registry created for the second workshop in the course 1
 
 ## Prerequisites
 
-You need to download one of the applications that will run on your operating system. [Here is a link to the available versions](https://drive.google.com/drive/folders/12NIhRDNUtfFcx1tmsSPuYMdQtHc2Uace?usp=sharing)
+Each executable file is located in a separate folder for each operating system (osx-x64, win10-x64, ubuntu-x64)
 
-If you don't find a version that you can run you can install .NET Core SDK and run the project instead. [Here is a link to the framework](https://www.microsoft.com/net/download)
+If you don't find a version of the application that will work on your operating system you can install .NET Core SDK and run the project instead. [Here is a link to the framework](https://www.microsoft.com/net/download)
 
 ## Start the application
 
@@ -29,7 +29,7 @@ If you want to run the project instead of the executable file do the following:
 
 ## Storage
 
-The application uses a JSON-file (data.json) to store the members. This file should already be included in the application folder, but if it's not make sure to add it before starting the application. If you create a new file it should look like this:
+The application uses a JSON-file (data.json) to store the members. This file should already be included in the same folder as the executable file, but if it's not make sure to add it before starting the application. If you create a new file it should look like this:
 
 ```
 []
